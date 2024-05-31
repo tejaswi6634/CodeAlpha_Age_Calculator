@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            background-color: AliceBlue;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+        input[type="text"],
+        input[type="date"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        input[type="submit"] {
+            background-color: lightgreen;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #32cd32;
+        }
+        #demo {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <form onsubmit="return Calculate_Age()">
+            <label for="na">Enter your name:</label>
+            <input type="text" id="na" name="na" required><br>
+            <label for="age">Enter your DOB:</label>
+            <input type="date" id="age" name="age" required><br>
+            <input type="submit" for="sub" value="Calculate">
+        </form>
+        <p id="demo"></p>
+    </div>
+    <script>
+        function Calculate_Age() {
+            var ptime = new Date();
+            var time = new Date(document.getElementById('age').value);
+            var year = time.getFullYear();
+            var pyear = ptime.getFullYear();
+            var age = pyear - year;
+            var month = time.getMonth();
+            var pmonth = ptime.getMonth();
+            var day = time.getDate();
+            var pday = ptime.getDate();
+
+            if (pmonth < month || (pmonth === month && pday < day)) {
+                age--;
+            }
+
+            document.getElementById("demo").innerHTML = "Your Age is: " + age + " years old";
+            return false;
+        }
+    </script>
+</body>
+</html>
